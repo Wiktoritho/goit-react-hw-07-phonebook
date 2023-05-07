@@ -4,17 +4,23 @@ import Filter from "./components/Filter";
 import css from "./App.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  fetchContacts,
   addContact,
   deleteContact,
   setFilter,
   selectContacts,
   selectFilter,
 } from "./redux/contactsSlice";
+import { useEffect } from "react";
 
 export default function App() {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleSubmit = (contact) => {
     dispatch(addContact(contact));
